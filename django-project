@@ -1,0 +1,49 @@
+#!/bin/bash
+
+PROJECT=$1
+APP=$2
+DJANGO_PATH=~/DojoAssignments/Python/Django/
+APP_LOCATION='apps.$APP'
+
+cd $DJANGO_PATH
+source $DJANGO_PATH/../myEnvironments/Django/bin/activate
+
+django-admin startproject $PROJECT
+echo "Started Django project $PROJECT"
+
+mkdir $DJANGO_PATH/$PROJECT/apps
+
+cd $PROJECT/apps
+
+python ../manage.py startapp $APP
+echo "Started Django app $APP"
+
+touch __init__.py
+
+touch $APP/urls.py
+
+~/bin/django-proj-libs/app_urls $APP/urls.py
+
+sed -i "/INSTALLED_APPS/a \ \ \ \ 'apps.$APP'," $DJANGO_PATH/$PROJECT/$PROJECT/settings.py
+
+~/bin/django-proj-libs/proj_urls $DJANGO_PATH/$PROJECT/$PROJECT/urls.py $APP
+
+cd $APP
+
+mkdir -p static/$APP/css
+mkdir static/$APP/js
+mkdir static/$APP/img
+mkdir -p templates/$APP
+
+touch static/$APP/css/main.css
+
+touch templates/$APP/index.html
+
+~/bin/django-proj-libs/html templates/$APP/index.html $APP
+
+~/bin/django-proj-libs/views views.py $APP
+echo "Configured and linked Django app to project"
+
+cd ../../
+python manage.py makemigrations
+python manage.py migrate

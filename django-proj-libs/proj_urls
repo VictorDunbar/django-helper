@@ -1,0 +1,8 @@
+#!/bin/bash
+cat > $1 <<EOF
+from django.conf.urls import url, include
+
+urlpatterns = [
+    url(r'^$2/', include('apps.$2.urls')),
+]
+EOF

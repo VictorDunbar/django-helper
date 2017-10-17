@@ -1,0 +1,9 @@
+#!/bin/bash
+cat > $1 <<EOF
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index),
+]
+EOF

@@ -1,0 +1,36 @@
+#!/bin/bash
+if [ ${PWD##*/} != "apps" ]
+then
+    echo "Must be in project apps folder"
+    exit 1
+fi
+
+source ~/DojoAssignments/Python/myEnvironments/Django/bin/activate
+python ../manage.py startapp $1 &&
+
+echo "Created base files for $1"
+
+cd ../
+
+PROJ=${PWD##*/}
+
+sed -i "/INSTALLED_APPS/a \ \ \ \ 'apps.$1'," $PROJ/settings.py
+sed -i "/urlpatterns/a \ \ \ \ url(r'^$1/', include('apps.$1.urls'))," $PROJ/urls.py
+
+echo "Linked $1 with parent project urls and settings"
+
+cd apps/$1
+
+touch urls.py
+~/bin/django-proj-libs/app_urls urls.py
+~/bin/django-proj-libs/views views.py $1
+
+mkdir -p static/$1/{css,js,img}
+mkdir -p templates/$1
+
+touch static/$1/css/main.css
+
+~/bin/django-proj-libs/html templates/$1/index.html $1
+
+echo "Created static and template base files"
+

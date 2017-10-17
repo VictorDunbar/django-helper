@@ -1,0 +1,7 @@
+#!/bin/bash
+cat > $1 <<EOF
+from django.shortcuts import render, redirect
+
+def index(request):
+    return render(request, "$2/index.html")
+EOF

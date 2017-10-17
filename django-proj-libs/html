@@ -1,0 +1,16 @@
+#!/bin/bash
+cat > $1 <<EOF
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '$2/css/main.css' %}" type="text/css" media="all" />
+    </head>
+    <body>
+        $2
+    </body>
+</html>
+EOF
