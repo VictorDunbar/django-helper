@@ -19,7 +19,7 @@ PROJECT=$1
 APP=$2
 APP_LOCATION='apps.$APP'
 
-if ["$VIRTUAL_ENV" != "" ]
+if [["$VIRTUAL_ENV" != "" ]]
 then
     deactivate
 fi
