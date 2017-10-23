@@ -13,22 +13,17 @@ DJANGO_LIBS=${BASH_SOURCE%/*}/django-proj-libs # Default is same level as this s
 
 ########################################################
 
-if [[ "$#" != "1" ]]
+if [ "$#" != "1" ]
 then
     echo "Not enough arguments"
     echo "Try: django-app [app_name]"
     exit 1
 fi
 
-if [[ ${PWD##*/} != "apps" ]]
+if [ ${PWD##*/} != "apps" ]
 then
     echo "Must be in project apps folder"
     exit 1
-fi
-
-if [["$VIRTUAL_ENV" != "" ]]
-then
-    deactivate
 fi
 
 source $DJANGO_ENV
