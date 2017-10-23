@@ -1,11 +1,28 @@
 #!/bin/bash
+
+# Configuration
+########################################################
+
+# Where activate script of your virtual environment is located
+DJANGO_ENV=~/DojoAssignments/Python/myEnvironments/Django/bin/activate
+
+# Where libs folder of this script is located
+DJANGO_LIBS=./django-proj-libs/ # Default is same level as this script
+
+########################################################
+
 if [ ${PWD##*/} != "apps" ]
 then
     echo "Must be in project apps folder"
     exit 1
 fi
 
-source ~/DojoAssignments/Python/myEnvironments/Django/bin/activate
+if ["$VIRTUAL_ENV" != "" ]
+then
+    deactivate
+fi
+
+source $DJANGO_ENV
 python ../manage.py startapp $1 &&
 
 echo "Created base files for $1"
@@ -22,15 +39,15 @@ echo "Linked $1 with parent project urls and settings"
 cd apps/$1
 
 touch urls.py
-~/bin/django-proj-libs/app_urls urls.py
-~/bin/django-proj-libs/views views.py $1
+$DJANGO_LIBS/app_urls urls.py
+$DJANGO_LIBS/views views.py $1
 
 mkdir -p static/$1/{css,js,img}
 mkdir -p templates/$1
 
 touch static/$1/css/main.css
 
-~/bin/django-proj-libs/html templates/$1/index.html $1
+$DJANGO_LIBS/html templates/$1/index.html $1
 
 echo "Created static and template base files"
 
