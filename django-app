@@ -6,8 +6,10 @@
 # Where activate script of your virtual environment is located
 DJANGO_ENV=~/DojoAssignments/Python/myEnvironments/Django/bin/activate
 
+########################################################
+# ONLY CHANGE IF NECESSARY
 # Where libs folder of this script is located
-DJANGO_LIBS=./django-proj-libs/ # Default is same level as this script
+DJANGO_LIBS=${BASH_SOURCE%/*}/django-proj-libs # Default is same level as this script
 
 ########################################################
 

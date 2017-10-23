@@ -3,13 +3,15 @@
 # Configuration, use correct paths!
 ##################################################################
 # Where the project should be created
-DJANGO_PATH=~/DojoAssignments/Python/Django/ 
+DJANGO_PATH=~/DojoAssignments/Python/Django 
 
 # Where the activate script of your virtual environment is located
 DJANGO_ENVIRONMENT=~/DojoAssignments/Python/myEnvironments/Django/bin/activate
 
+##################################################################
+# ONLY CHANGE IF NECESSARY
 # Where the libs folder of this script is located
-DJANGO_LIBS=./django-proj-libs/ # default is same level of this script
+DJANGO_LIBS=${BASH_SOURCE%/*}/django-proj-libs # default is same level of this script
 
 ##################################################################
 
