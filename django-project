@@ -15,6 +15,13 @@ DJANGO_LIBS=${BASH_SOURCE%/*}/django-proj-libs # default is same level of this s
 
 ##################################################################
 
+if [[ "$#" != "2" ]]
+then
+    echo "Not enough arguments"
+    echo "Try: django-project [project_name] [app_name]"
+    exit 1
+fi
+
 PROJECT=$1
 APP=$2
 APP_LOCATION='apps.$APP'
